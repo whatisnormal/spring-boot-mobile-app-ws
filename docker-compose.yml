@@ -1,0 +1,30 @@
+version: '3.1'
+services:
+  db:
+    image: library/mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: therootpassword
+      MYSQL_USER: photo-db-user
+      MYSQL_PASSWORD: photo-db-pwd
+      MYSQL_DATABASE: photo_app
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db_data:/var/lib/mysql
+
+# docker run --name=local-db -p3306:3306 -d mysql/mysql-server:5.7
+# docker logs local-db 2>&1 | grep GENERATED
+# docker exec -it local-db mysql -uroot -p
+  # CREATE USER 'root@172.17.0.1' IDENTIFIED BY 'therootpassword';
+#  ALTER USER 'root'@'localhost' IDENTIFIED BY 'therootpassword';
+# create user 'photo-db-user'@'localhost' identified by 'photo-db-pwd';
+# create database photo_app;
+# create user 'photo-db-user'@'172.17.0.1' identified by 'photo-db-pwd';
+# grant all privileges on photo_app.* to  'photo-db-user'@'localhost';
+  # grant all privileges on photo_app.* to  'photo-db-user'@'172.17.0.1';
+  #grant all privileges on *.* to 'root@172.17.0.1';
+#  grant all privileges on *.* to 'photo-db-user@172.17.0.1';
+#  select host from mysql.user where user = 'photo-db-user';
+#  docker exec -it local-db mysql -h172.17.0.1 -uphoto-db-user -p
+# docker exec -it local-db mysql -uroot -p
